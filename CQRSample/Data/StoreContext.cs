@@ -9,6 +9,8 @@ namespace CQRSample.Data
         public StoreContext(DbContextOptions<StoreContext> options) : base(options) { }
 
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<UserRole> UserRoles { get; set; }
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

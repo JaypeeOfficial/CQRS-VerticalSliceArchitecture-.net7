@@ -29,16 +29,15 @@ namespace CQRSample.Features.Users
                 _context = context;
             }
 
-           public async Task<PagedList<GetUserResult>> Handle (GetUserQuery request, CancellationToken cancellationToken)
+            public async Task<PagedList<GetUserResult>> Handle(GetUserQuery request, CancellationToken cancellationToken)
             {
 
-                var user =   _context.Users.AsQueryable();
+                var user = _context.Users.AsQueryable();
 
                 if (!string.IsNullOrEmpty(request.Search))
                 {
                     user = user.Where(x => x.FullName.Contains(request.Search));
                 }
-
 
                 var result = user.Select(x => new GetUserResult
                 {
@@ -48,15 +47,11 @@ namespace CQRSample.Features.Users
 
                 });
 
-
                 return await PagedList<GetUserResult>.CreateAsync(result, request.PageNumber, request.PageSize);
-
 
             }
 
-
         }
-
 
 
     }
